@@ -8,8 +8,8 @@ import Search from "./SearchScreen";
 import NewUser from "./NewUserScreen";
 
 const IndexScreen = ({ route }) => {
-  const { user } = route.params;
-  console.log(user);
+  //const { user } = route.params;
+  //console.log(user);
 
   const [state, setState] = useState("listOfExpenses");
 
