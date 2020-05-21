@@ -19,10 +19,7 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <Screen style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={require("../../assets/logo-red.png")}
-      />
+      <Image style={styles.logo} source={require("../../assets/Logo.png")} />
       <AppForm
         initialValues={{ email: "", password: "" }}
         onSubmit={handleSubmit}
@@ -56,10 +53,11 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    backgroundColor: colors.white,
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 150,
+    height: 150,
     alignSelf: "center",
     marginTop: 50,
     marginBottom: 20,
