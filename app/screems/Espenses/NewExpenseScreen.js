@@ -13,6 +13,7 @@ import Screen from "../../components/Screen";
 import items from "../../Constants/sourcesOfExpenses";
 import payment from "../../Constants/paymentMethods";
 import AppFormDatePicker from "../../components/forms/AppFormDatePicker";
+import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
 
 const NewExpense = () => {
   return (
@@ -57,6 +58,7 @@ const NewExpense = () => {
           placeholder="Descrição"
         />
         <AppFormDatePicker name="date" />
+        <AppFormCheckbox checkBoxText="Pago" name="isPayed" />
         <AppSubmitButton title="Add despesa" />
       </AppForm>
     </Screen>
