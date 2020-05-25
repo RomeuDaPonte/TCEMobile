@@ -59,13 +59,16 @@ const NewExpense = () => {
         />
         <AppFormDatePicker name="date" />
         <AppFormCheckbox checkBoxText="Pago" name="isPayed" />
-        <AppSubmitButton title="Add despesa" />
+        <View style={styles.submitButton}>
+          <AppSubmitButton title="Add despesa" />
+        </View>
       </AppForm>
     </Screen>
   );
 };
 
 const styles = StyleSheet.create({
+  submitButton: { paddingVertical: 15 },
   view: {
     padding: 10,
   },
