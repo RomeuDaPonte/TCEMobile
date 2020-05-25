@@ -13,6 +13,7 @@ import defaultStyles from "../LayoutHelpers/styles";
 import AppText from "./appText";
 import Screen from "./Screen";
 import PickerItem from "./PickerItem";
+import AppButton from "./AppButton";
 
 const AppPicker = ({
   icon,
@@ -51,8 +52,7 @@ const AppPicker = ({
         </View>
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
-        <Screen>
-          <Button title="close" onPress={() => setModalVisible(false)} />
+        <Screen style={styles.modalStyle}>
           <FlatList
             data={items}
             keyExtractor={(item) => item.value.toString()}
@@ -67,6 +67,11 @@ const AppPicker = ({
                 }}
               />
             )}
+          />
+          <AppButton
+            title="sair"
+            color="secondary"
+            onPress={() => setModalVisible(false)}
           />
         </Screen>
       </Modal>
@@ -84,6 +89,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
+  },
+  modalStyle: {
+    paddingHorizontal: 10,
   },
   placeholder: {
     color: defaultStyles.colors.medium,

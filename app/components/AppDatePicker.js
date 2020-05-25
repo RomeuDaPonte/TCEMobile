@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import React from "react";
+import { View, StyleSheet, TextInput } from "react-native";
 import { Container, Content, DatePicker } from "native-base";
 
-import AppText from "../../components/appText";
-import { date } from "yup";
-
-const NewUser = () => {
-  const [data, setData] = useState(new Date().toISOString().slice(0, 10));
-
+const AppDatePicker = ({ name, setFieldValue, ...otherProps }) => {
   function getFormatedDefaultDate() {
+    const data = new Date().toISOString().slice(0, 10);
     const dia = data.slice(0, 4);
     const mes = data.slice(5, 7) - 1;
     const ano = data.slice(8, 10);
@@ -21,20 +17,23 @@ const NewUser = () => {
       <Container>
         <Content>
           <DatePicker
-            name="data"
+            name={name}
             defaultDate={getFormatedDefaultDate()}
             locale={"pt"}
             timeZoneOffsetInMinutes={undefined}
             modalTransparent={false}
             animationType={"fade"}
             androidMode={"default"}
-            placeHolderText={`${data} escolher outra`}
+            placeHolderText={`${new Date()
+              .toISOString()
+              .slice(0, 10)} escolher outra`}
             textStyle={{ color: "green" }}
             placeHolderTextStyle={{ color: "#d3d3d3" }}
-            onDateChange={(chosenData) =>
-              setData(chosenData.toISOString().slice(0, 10))
+            onDateChange={(d) =>
+              setFieldValue(name, d.toISOString().slice(0, 10))
             }
             disabled={false}
+            {...otherProps}
           />
         </Content>
       </Container>
@@ -44,8 +43,7 @@ const NewUser = () => {
 
 const styles = StyleSheet.create({
   view: {
-    flex: 1,
+    flex: 0.2,
   },
 });
-
-export default NewUser;
+export default AppDatePicker;
