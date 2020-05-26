@@ -6,14 +6,16 @@ import IconNavigation from "./IconNavigation";
 import NewExpense from "./NewExpenseScreen";
 import Search from "./SearchScreen";
 import NewUser from "./NewUserScreen";
+import UseIconNavigationReducer from "../../reducers/useIconNavigationReducer";
 
 const IndexScreen = ({ route }) => {
+  const [isHighlighted, dispatch] = UseIconNavigationReducer();
+  const [state, setState] = useState("listOfExpenses");
   //const { user } = route.params;
   //console.log(user);
 
-  const [state, setState] = useState("listOfExpenses");
-
-  function handleIconTaped(iconName = "listOfExpenses") {
+  function handleIconNavigation(iconName = "listOfExpenses") {
+    dispatch({ type: "touched", iconName: iconName });
     setState(iconName);
   }
 
@@ -22,8 +24,13 @@ const IndexScreen = ({ route }) => {
       {state === "listOfExpenses" && <ListOfExpenses />}
       {state === "newUser" && <NewUser />}
       {state === "search" && <Search />}
-      {state === "newExpense" && <NewExpense />}
-      <IconNavigation handleIconTaped={handleIconTaped} />
+      {state === "newExpense" && (
+        <NewExpense handleIconNavigation={handleIconNavigation} />
+      )}
+      <IconNavigation
+        handleIconNavigation={handleIconNavigation}
+        isHighlighted={isHighlighted}
+      />
     </Screen>
   );
 };

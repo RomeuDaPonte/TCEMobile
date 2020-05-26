@@ -4,14 +4,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../../LayoutHelpers/colors";
 import AppText from "../../components/appText";
-import UseIconNavigationReducer from "../../reducers/useIconNavigationReducer";
 
-const IconNavigation = ({ handleIconTaped }) => {
-  const [state, dispatch] = UseIconNavigationReducer();
-
+const IconNavigation = ({ handleIconNavigation, isHighlighted }) => {
   function handleTouch(e) {
-    dispatch({ type: "touched", iconName: e._targetInst.key });
-    handleIconTaped(e._targetInst.key);
+    handleIconNavigation(e._targetInst.key);
   }
 
   return (
@@ -19,11 +15,13 @@ const IconNavigation = ({ handleIconTaped }) => {
       <TouchableWithoutFeedback onPress={handleTouch}>
         <View key="listOfExpenses">
           <MaterialCommunityIcons
-            color={state.listOfExpenses}
+            color={isHighlighted.listOfExpenses}
             name="view-list"
             size={50}
           />
-          <AppText style={[styles.appText, { color: state.listOfExpenses }]}>
+          <AppText
+            style={[styles.appText, { color: isHighlighted.listOfExpenses }]}
+          >
             U/Despe
           </AppText>
         </View>
@@ -33,9 +31,9 @@ const IconNavigation = ({ handleIconTaped }) => {
           <MaterialCommunityIcons
             name="account-plus"
             size={50}
-            color={state.newUser}
+            color={isHighlighted.newUser}
           />
-          <AppText style={[styles.appText, { color: state.newUser }]}>
+          <AppText style={[styles.appText, { color: isHighlighted.newUser }]}>
             Add User
           </AppText>
         </View>
@@ -45,9 +43,9 @@ const IconNavigation = ({ handleIconTaped }) => {
           <MaterialCommunityIcons
             name="table-search"
             size={50}
-            color={state.search}
+            color={isHighlighted.search}
           />
-          <AppText style={[styles.appText, { color: state.search }]}>
+          <AppText style={[styles.appText, { color: isHighlighted.search }]}>
             Pesq
           </AppText>
         </View>
@@ -55,11 +53,13 @@ const IconNavigation = ({ handleIconTaped }) => {
       <TouchableWithoutFeedback onPress={handleTouch}>
         <View key="newExpense">
           <MaterialCommunityIcons
-            color={state.newExpense}
+            color={isHighlighted.newExpense}
             name="plus"
             size={50}
           />
-          <AppText style={[styles.appText, { color: state.newExpense }]}>
+          <AppText
+            style={[styles.appText, { color: isHighlighted.newExpense }]}
+          >
             N/Desp/
           </AppText>
         </View>

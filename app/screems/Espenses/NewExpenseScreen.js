@@ -15,7 +15,7 @@ import payment from "../../Constants/paymentMethods";
 import AppFormDatePicker from "../../components/forms/AppFormDatePicker";
 import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
 
-const NewExpense = () => {
+const NewExpense = ({ handleIconTaped }) => {
   return (
     <Screen style={styles.view}>
       <AppForm
@@ -27,7 +27,8 @@ const NewExpense = () => {
           date: new Date().toISOString().slice(0, 10),
           isPayed: true,
         }}
-        onSubmit={(values) => console.log(values)}
+        //onSubmit={(values) => console.log(values)}
+        onSubmit={() => handleIconTaped()}
         validationSchema={Validation.expenseSchema}
       >
         <AppFormPicker
