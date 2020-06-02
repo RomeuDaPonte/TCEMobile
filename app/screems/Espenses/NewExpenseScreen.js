@@ -27,11 +27,11 @@ const NewExpense = ({ handleIconNavigation }) => {
           amount: "",
           description: "",
           paymentMethod: null,
-          date: new Date().toISOString().slice(0, 10),
+          date: new Date(),
           isPayed: true,
         }}
-        //onSubmit={(values) => console.log(values)}
-        onSubmit={() => handleIconNavigation()}
+        onSubmit={(values) => console.log(values)}
+        //onSubmit={() => handleIconNavigation()}
         validationSchema={Validation.expenseSchema}
       >
         <AppFormPicker

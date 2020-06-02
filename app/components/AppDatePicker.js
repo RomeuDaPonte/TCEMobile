@@ -1,53 +1,75 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { DatePicker } from "native-base";
+import React, { useState } from "react";
+import {
+  Platform,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../LayoutHelpers/colors";
+import AppText from "../components/appText";
 
-const AppDatePicker = ({ name, setFieldValue, ...otherProps }) => {
-  function getFormatedDefaultDate() {
-    const data = new Date().toISOString().slice(0, 10);
-    const dia = data.slice(0, 4);
-    const mes = data.slice(5, 7) - 1;
-    const ano = data.slice(8, 10);
+const AppDatePicker = ({ name, value, setFieldValue }) => {
+  const date = new Date();
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
 
-    return new Date(dia, mes, ano);
-  }
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setFieldValue(name, currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
 
   return (
-    <View style={styles.view}>
-      <DatePicker
-        name={name}
-        defaultDate={getFormatedDefaultDate()}
-        locale={"pt"}
-        timeZoneOffsetInMinutes={undefined}
-        modalTransparent={false}
-        animationType={"fade"}
-        androidMode={"default"}
-        placeHolderText={`${new Date().toISOString().slice(0, 10)}`}
-        placeHolderTextStyle={{
-          color: colors.medium,
-          fontSize: 20,
-          marginLeft: -5,
-          padding: 0,
-        }}
-        onDateChange={(d) => setFieldValue(name, d.toISOString().slice(0, 10))}
-        disabled={false}
-        {...otherProps}
-      />
+    <View>
+      <TouchableWithoutFeedback onPress={showDatepicker}>
+        <View style={styles.container}>
+          <AppText style={styles.placeholder}>
+            {value.toString().slice(0, 16)}
+          </AppText>
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={20}
+            color={colors.medium}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+      {show && (
+        <DateTimePicker
+          name={name}
+          timeZoneOffsetInMinutes={0}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+          value={value}
+        />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  datePicker: {
-    marginBottom: 10,
-  },
-  view: {
-    flex: 0.2,
+  container: {
     backgroundColor: colors.light,
+    borderRadius: 25,
+    flexDirection: "row",
     padding: 15,
     marginVertical: 10,
+  },
+  placeholder: {
+    flex: 1,
   },
 });
 export default AppDatePicker;
