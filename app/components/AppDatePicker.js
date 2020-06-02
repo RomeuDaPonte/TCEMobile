@@ -1,6 +1,7 @@
 import React from "react";
-import { View, StyleSheet, TextInput } from "react-native";
-import { Container, Content, DatePicker } from "native-base";
+import { View, StyleSheet } from "react-native";
+import { DatePicker } from "native-base";
+
 import colors from "../LayoutHelpers/colors";
 
 const AppDatePicker = ({ name, setFieldValue, ...otherProps }) => {
@@ -27,6 +28,8 @@ const AppDatePicker = ({ name, setFieldValue, ...otherProps }) => {
         placeHolderTextStyle={{
           color: colors.medium,
           fontSize: 20,
+          marginLeft: -5,
+          padding: 0,
         }}
         onDateChange={(d) => setFieldValue(name, d.toISOString().slice(0, 10))}
         disabled={false}
@@ -41,7 +44,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   view: {
-    flex: 0.7,
+    flex: 0.2,
     backgroundColor: colors.light,
     padding: 15,
     marginVertical: 10,

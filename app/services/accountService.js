@@ -17,6 +17,7 @@ export function login(email, password) {
     http
       .post(apiEndPont + "/login", { email, password })
       .then((res) => {
+        console.log("then ?");
         saveJwtLocaly(res.data).catch((err) => reject({ err }));
         resolve(jwtDecode(res.data));
       })

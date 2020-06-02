@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 import Validation from "../../schemas/ExpenseSchema";
@@ -14,8 +14,11 @@ import items from "../../Constants/sourcesOfExpenses";
 import payment from "../../Constants/paymentMethods";
 import AppFormDatePicker from "../../components/forms/AppFormDatePicker";
 import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
+import { UseCurrentUser } from "../../customHooks/useCurrentUser";
 
-const NewExpense = ({ handleIconTaped }) => {
+const NewExpense = ({ handleIconNavigation }) => {
+  //const { currentUser } = UseCurrentUser();
+
   return (
     <Screen style={styles.view}>
       <AppForm
@@ -28,7 +31,7 @@ const NewExpense = ({ handleIconTaped }) => {
           isPayed: true,
         }}
         //onSubmit={(values) => console.log(values)}
-        onSubmit={() => handleIconTaped()}
+        onSubmit={() => handleIconNavigation()}
         validationSchema={Validation.expenseSchema}
       >
         <AppFormPicker

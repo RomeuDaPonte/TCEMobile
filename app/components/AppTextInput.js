@@ -1,12 +1,13 @@
 import React from "react";
-import { View, StyleSheet, TextInput, Platform } from "react-native";
+import { StyleSheet } from "react-native";
+import { Item, Input, View } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import defaultStyles from "../LayoutHelpers/styles";
 
 const AppTextInput = ({ icon, width = "100%", ...otherProps }) => {
   return (
-    <View style={[styles.container, { width }]}>
+    <Item rounded style={styles.item}>
       {icon && (
         <MaterialCommunityIcons
           name={icon}
@@ -15,25 +16,19 @@ const AppTextInput = ({ icon, width = "100%", ...otherProps }) => {
           style={styles.icon}
         />
       )}
-      <TextInput
-        placeholderTextColor={defaultStyles.colors.medium}
-        style={defaultStyles.text}
-        {...otherProps}
-      />
-    </View>
+
+      <Input {...otherProps} />
+    </Item>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: defaultStyles.colors.light,
-    borderRadius: 25,
-    flexDirection: "row",
-    padding: 15,
-    marginVertical: 10,
-  },
   icon: {
     marginRight: 10,
+  },
+  item: {
+    backgroundColor: defaultStyles.colors.light,
+    marginVertical: 10,
   },
 });
 
