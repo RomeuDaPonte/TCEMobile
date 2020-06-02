@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 const expenseSchema = yup.object().shape({
-  source: yup.object().required().label("Fonte de despasa"),
+  source: yup.string().required().label("Fonte de despasa"),
   amount: yup.number().required().min(0.01).label("Montante"),
   description: yup.string().nullable().label("Descrição"),
   paymentMethod: yup.string().required().label("Método de pagamento"),

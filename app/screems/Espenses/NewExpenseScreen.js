@@ -23,10 +23,10 @@ const NewExpense = ({ handleIconNavigation }) => {
     <Screen style={styles.view}>
       <AppForm
         initialValues={{
-          source: null,
+          source: "",
           amount: "",
           description: "",
-          paymentMethod: null,
+          paymentMethod: "",
           date: new Date(),
           isPayed: true,
         }}
