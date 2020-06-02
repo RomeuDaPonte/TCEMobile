@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
+    marginLeft: -5,
   },
 });
 

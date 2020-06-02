@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     flex: 1,
+    marginLeft: -5,
   },
 });
 export default AppDatePicker;
