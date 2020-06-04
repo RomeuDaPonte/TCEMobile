@@ -7,7 +7,6 @@ import AccountSchemas from "../../schemas/AccountSchemas";
 import { login } from "../../services/accountService";
 import colors from "../../LayoutHelpers/colors";
 import AppText from "../../components/appText";
-import { View } from "native-base";
 
 const LoginScreen = ({ navigation }) => {
   const [err, setErr] = useState("");

@@ -6,7 +6,7 @@ const expenseSchema = yup.object().shape({
   description: yup.string().nullable().label("Descrição"),
   paymentMethod: yup.string().required().label("Método de pagamento"),
   date: yup.date().required().label("Data"),
-  isPayed: yup.bool().required().label("Pago ?"),
+  isPaid: yup.bool().required().label("Pago ?"),
 });
 
 export default {

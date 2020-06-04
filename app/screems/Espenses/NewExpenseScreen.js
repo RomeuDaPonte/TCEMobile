@@ -1,26 +1,38 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
 
 import Validation from "../../schemas/ExpenseSchema";
 import PickerItem from "../../components/PickerItem";
+import AppText from "../../components/appText";
+import colors from "../../LayoutHelpers/colors";
 import {
   AppForm,
   AppFormField,
   AppFormPicker,
   AppSubmitButton,
 } from "../../components/forms";
-import Screen from "../../components/Screen";
 import items from "../../Constants/sourcesOfExpenses";
 import payment from "../../Constants/paymentMethods";
 import AppFormDatePicker from "../../components/forms/AppFormDatePicker";
 import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
 import { UseCurrentUser } from "../../customHooks/useCurrentUser";
+import expenseService from "../../services/expenseService";
 
 const NewExpense = ({ handleIconNavigation }) => {
-  //const { currentUser } = UseCurrentUser();
+  const { currentUser } = UseCurrentUser();
+  const [err, setErr] = useState();
+
+  function handleSubmit(values) {
+    values.userId = currentUser._id;
+    expenseService
+      .newExpense(values)
+      .then((res) => handleIconNavigation())
+      .catch((err) => setErr(err.response.data));
+  }
 
   return (
-    <Screen style={styles.view}>
+    <KeyboardAvoidingView behavior="position" style={styles.view}>
       <AppForm
         initialValues={{
           source: "",
@@ -28,9 +40,9 @@ const NewExpense = ({ handleIconNavigation }) => {
           description: "",
           paymentMethod: "",
           date: new Date(),
-          isPayed: true,
+          isPaid: true,
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
         //onSubmit={() => handleIconNavigation()}
         validationSchema={Validation.expenseSchema}
       >
@@ -62,19 +74,25 @@ const NewExpense = ({ handleIconNavigation }) => {
           placeholder="Descrição"
         />
         <AppFormDatePicker name="date" />
-        <AppFormCheckbox checkBoxText="Pago" name="isPayed" />
+        <AppFormCheckbox checkBoxText="Pago" name="isPaid" />
         <View style={styles.submitButton}>
           <AppSubmitButton title="Add despesa" />
         </View>
       </AppForm>
-    </Screen>
+      <AppText style={styles.errorMessage}>{err}</AppText>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
+  errorMessage: {
+    color: colors.danger,
+    alignSelf: "center",
+  },
   submitButton: { paddingVertical: 15 },
   view: {
-    padding: 10,
+    padding: 20,
+    flex: 1,
   },
 });
 export default NewExpense;

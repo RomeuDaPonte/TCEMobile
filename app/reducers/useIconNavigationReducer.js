@@ -3,15 +3,16 @@ import { useReducer } from "react";
 import colors from "../LayoutHelpers/colors";
 
 const initialState = {
-  listOfExpenses: colors.light,
-  newUser: colors.lightGrey,
-  search: colors.lightGrey,
-  newExpense: colors.lightGrey,
+  ListOfExpenses: colors.primary,
+  RewUser: colors.black,
+  Settings: colors.black,
+  Search: colors.black,
+  NewExpense: colors.black,
 };
 
 const defaultState = {
   ...initialState,
-  listOfExpenses: colors.lightGrey,
+  ListOfExpenses: colors.black,
 };
 
 function iconNavigationReducer(state, action) {
@@ -19,7 +20,7 @@ function iconNavigationReducer(state, action) {
     case "touched": {
       return {
         ...defaultState,
-        [action.iconName]: colors.light,
+        [action.iconName]: colors.primary,
       };
     }
   }

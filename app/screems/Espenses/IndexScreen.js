@@ -1,36 +1,38 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import ListOfExpenses from "./ListOfExpensesScreen";
 import Screen from "../../components/Screen";
-import IconNavigation from "./IconNavigation";
-import NewExpense from "./NewExpenseScreen";
-import Search from "./SearchScreen";
-import NewUser from "./NewUserScreen";
-import UseIconNavigationReducer from "../../reducers/useIconNavigationReducer";
+import IconNavigator from "../../components/IconNavigator";
+import NewExpense from "../Espenses/NewExpenseScreen";
+import NewUser from "../Espenses/NewUserScreen";
+import Search from "../Espenses/SearchScreen";
+import Settings from "../Account/SettingsScreen";
+
+const Stack = createStackNavigator();
 
 const IndexScreen = ({ route }) => {
-  const [isHighlighted, dispatch] = UseIconNavigationReducer();
-  const [state, setState] = useState("listOfExpenses");
-  //const { user } = route.params;
-  //console.log(user);
+  const refContext = useRef(null);
 
-  function handleIconNavigation(iconName = "listOfExpenses") {
-    dispatch({ type: "touched", iconName: iconName });
-    setState(iconName);
-  }
+  // const { user } = route.params;
+  // console.log(user);
 
   return (
     <Screen>
-      {state === "listOfExpenses" && <ListOfExpenses />}
-      {state === "newUser" && <NewUser />}
-      {state === "search" && <Search />}
-      {state === "newExpense" && (
-        <NewExpense handleIconNavigation={handleIconNavigation} />
-      )}
-      <IconNavigation
-        handleIconNavigation={handleIconNavigation}
-        isHighlighted={isHighlighted}
-      />
+      <NavigationContainer ref={refContext} independent={true}>
+        <Stack.Navigator
+          initialRouteName="ListOfExpenses"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="ListOfExpenses" component={ListOfExpenses} />
+          <Stack.Screen name="NewExpense" component={NewExpense} />
+          <Stack.Screen name="NewUser" component={NewUser} />
+          <Stack.Screen name="Search" component={Search} />
+          <Stack.Screen name="Settings" component={Settings} />
+        </Stack.Navigator>
+        <IconNavigator navigationContext={refContext} />
+      </NavigationContainer>
     </Screen>
   );
 };
