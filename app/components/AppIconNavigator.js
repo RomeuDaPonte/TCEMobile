@@ -1,16 +1,14 @@
 import React from "react";
-import {
-  View,
-  TouchableWithoutFeedback,
-  StyleSheet,
-  TouchableHighlightBase,
-} from "react-native";
+import { View, TouchableWithoutFeedback, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import UseIconNavigationReducer from "../reducers/useIconNavigationReducer";
+import UseToggleKeyboard from "../customHooks/useToggleKeyboard";
 
-const IconNavigator = ({ navigationContext }) => {
+const AppIconNavigator = ({ navigationContext }) => {
   const [state, dispatch] = UseIconNavigationReducer();
+
+  const { showKeyboard } = UseToggleKeyboard();
 
   function handleIconPress(e) {
     dispatch({ type: "touched", iconName: e._targetInst.key });
@@ -19,7 +17,7 @@ const IconNavigator = ({ navigationContext }) => {
   }
 
   return (
-    <View style={[styles.navigation]}>
+    <View style={[styles.navigation, showKeyboard]}>
       <TouchableWithoutFeedback onPress={handleIconPress}>
         <View key="ListOfExpenses" style={styles.logoPlaceholder}>
           <MaterialCommunityIcons
@@ -79,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IconNavigator;
+export default AppIconNavigator;

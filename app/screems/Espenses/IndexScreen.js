@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import ListOfExpenses from "./ListOfExpensesScreen";
 import Screen from "../../components/Screen";
-import IconNavigator from "../../components/IconNavigator";
+import AppIconNavigator from "../../components/AppIconNavigator";
 import NewExpense from "../Espenses/NewExpenseScreen";
 import NewUser from "../Espenses/NewUserScreen";
 import Search from "../Espenses/SearchScreen";
@@ -31,7 +31,7 @@ const IndexScreen = ({ route }) => {
           <Stack.Screen name="Search" component={Search} />
           <Stack.Screen name="Settings" component={Settings} />
         </Stack.Navigator>
-        <IconNavigator navigationContext={refContext} />
+        <AppIconNavigator navigationContext={refContext} />
       </NavigationContainer>
     </Screen>
   );

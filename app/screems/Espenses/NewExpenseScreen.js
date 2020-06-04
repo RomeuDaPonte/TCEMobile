@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
   submitButton: { paddingVertical: 15 },
   view: {
     padding: 20,
-    flex: 1,
   },
 });
 export default NewExpense;
