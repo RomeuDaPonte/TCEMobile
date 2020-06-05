@@ -19,7 +19,7 @@ import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
 import { UseCurrentUser } from "../../customHooks/useCurrentUser";
 import expenseService from "../../services/expenseService";
 
-const NewExpense = ({ handleIconNavigation }) => {
+const NewExpense = ({ navigation }) => {
   const { currentUser } = UseCurrentUser();
   const [err, setErr] = useState();
 
@@ -27,7 +27,7 @@ const NewExpense = ({ handleIconNavigation }) => {
     values.userId = currentUser._id;
     expenseService
       .newExpense(values)
-      .then((res) => handleIconNavigation())
+      .then((res) => navigation.navigate("ListOfExpenses"))
       .catch((err) => setErr(err.response.data));
   }
 
@@ -43,7 +43,6 @@ const NewExpense = ({ handleIconNavigation }) => {
           isPaid: true,
         }}
         onSubmit={handleSubmit}
-        //onSubmit={() => handleIconNavigation()}
         validationSchema={Validation.expenseSchema}
       >
         <AppFormPicker
