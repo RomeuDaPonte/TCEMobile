@@ -5,16 +5,9 @@ const loginSchema = yup.object().shape({
   password: yup.string().required().min(4).label("Password"),
 });
 
-const verifyEmailSchema = yup.object({
-  email: yup.string().required().email(),
-});
-
 const registerSchema = yup.object({
-  businessName: yup.string().required(),
   userName: yup.string().required("Nome do utilizador necessário"),
-  country: yup.string().required(),
-  domainAdress: yup.string(),
-  specialty: yup.string().required(),
+  email: yup.string().email().required("Email é necessário"),
   password: yup.string().required("Password é necessária"),
   passwordConfirmation: yup
     .string()
@@ -23,11 +16,9 @@ const registerSchema = yup.object({
       [yup.ref("password"), null],
       "Confirmar password tem de ser igual a password"
     ),
-  promoCode: yup.string(),
 });
 
 export default {
   loginSchema,
-  verifyEmailSchema,
   registerSchema,
 };

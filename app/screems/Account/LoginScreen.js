@@ -7,6 +7,7 @@ import AccountSchemas from "../../schemas/AccountSchemas";
 import { login } from "../../services/accountService";
 import colors from "../../LayoutHelpers/colors";
 import AppText from "../../components/appText";
+import AppButton from "../../components/AppButton";
 
 const LoginScreen = ({ navigation }) => {
   const [err, setErr] = useState("");
@@ -46,6 +47,11 @@ const LoginScreen = ({ navigation }) => {
         <AppSubmitButton title="Login" />
         <AppText style={styles.errorMessage}>{err}</AppText>
       </AppForm>
+      <AppButton
+        title="Registar"
+        onPress={() => navigation.navigate("Register")}
+        color="secondary"
+      />
     </Screen>
   );
 };
