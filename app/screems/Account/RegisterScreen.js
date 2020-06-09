@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Image, KeyboardAvoidingView } from "react-native";
 
 import Screen from "../../components/Screen";
@@ -6,16 +6,22 @@ import colors from "../../LayoutHelpers/colors";
 import { AppForm, AppFormField, AppSubmitButton } from "../../components/forms";
 import AppButton from "../../components/AppButton";
 import AccountSchemas from "../../schemas/AccountSchemas";
+import { register } from "../../services/accountService";
+import AppText from "../../components/appText";
 
-const RegisterScreenn = () => {
+const RegisterScreenn = ({ navigation }) => {
+  const [err, setErr] = useState("");
+
   function handleRegister(data) {
-    console.log(data);
+    register(data)
+      .then((user) => navigation.navigate("Index", { user: user }))
+      .catch((err) => setErr(err.response.data));
   }
 
   return (
     <Screen style={styles.container}>
-      <Image style={styles.logo} source={require("../../assets/Logo.png")} />
       <KeyboardAvoidingView behavior="position">
+        <Image style={styles.logo} source={require("../../assets/Logo.png")} />
         <AppForm
           initialValues={{
             userName: "",
@@ -61,8 +67,13 @@ const RegisterScreenn = () => {
             textContentType="password"
           />
           <AppSubmitButton title="Registar" />
+          <AppText style={styles.errorMessage}>{err}</AppText>
         </AppForm>
-        <AppButton title="Voltar ao login" color="secondary" />
+        <AppButton
+          title="Voltar ao login"
+          onPress={() => navigation.navigate("Login")}
+          color="secondary"
+        />
       </KeyboardAvoidingView>
     </Screen>
   );

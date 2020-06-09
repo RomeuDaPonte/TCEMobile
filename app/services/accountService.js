@@ -24,6 +24,18 @@ export function login(email, password) {
   });
 }
 
+export function register(registerData) {
+  return new Promise((resolve, reject) => {
+    http
+      .post(apiEndPont + "/register", { ...registerData })
+      .then((res) => {
+        saveJwtLocaly(res.data).catch((err) => reject({ err }));
+        resolve(jwtDecode(res.data));
+      })
+      .catch((err) => reject(err));
+  });
+}
+
 export async function getJwt() {
   return await AsyncStorage.getItem(tokenKey);
 }
