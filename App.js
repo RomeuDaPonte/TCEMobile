@@ -4,7 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "./app/screems/Account/LoginScreen";
 import WelcomeScreen from "./app/screems/WelcomeScren";
-import AccountScreen from "./app/screems/Account/AccountScreen";
 import IndexScreen from "./app/screems/Espenses/IndexScreen";
 import RegisterScreen from "./app/screems/Account/RegisterScreen";
 

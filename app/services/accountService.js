@@ -53,7 +53,7 @@ export async function getCurrentUser() {
     const jwt = await AsyncStorage.getItem(tokenKey);
     return jwtDecode(jwt);
   } catch (ex) {
-    return null;
+    return ex;
   }
 }
 

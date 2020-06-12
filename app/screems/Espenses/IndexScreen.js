@@ -18,8 +18,7 @@ const Tab = createBottomTabNavigator();
 
 const IndexScreen = ({ route }) => {
   const { showKeyboard } = useToggleKeyboard();
-  // const { user } = route.params;
-  // console.log(user);
+  const { user } = route.params;
 
   return (
     <>
