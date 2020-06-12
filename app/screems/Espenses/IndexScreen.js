@@ -12,6 +12,7 @@ import Search from "../Espenses/SearchScreen";
 import Settings from "../Account/SettingsScreen";
 import colors from "../../LayoutHelpers/colors";
 import useToggleKeyboard from "../../customHooks/useToggleKeyboard";
+import AppHeader from "../../components/AppHeader";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,73 +22,76 @@ const IndexScreen = ({ route }) => {
   // console.log(user);
 
   return (
-    <Screen>
-      <NavigationContainer independent={true}>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName = "view-list";
+    <>
+      <AppHeader />
+      <Screen>
+        <NavigationContainer independent={true}>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                let iconName = "view-list";
 
-              if (route.name === "LisOfExpenses") iconName = "view-list";
-              else if (route.name === "NewUser") iconName = "account-plus";
-              else if (route.name === "Settings") iconName = "settings";
-              else if (route.name === "Search") iconName = "table-search";
-              else if (route.name === "NewExpense") iconName = "plus";
+                if (route.name === "LisOfExpenses") iconName = "view-list";
+                else if (route.name === "NewUser") iconName = "account-plus";
+                else if (route.name === "Settings") iconName = "settings";
+                else if (route.name === "Search") iconName = "table-search";
+                else if (route.name === "NewExpense") iconName = "plus";
 
-              return (
-                <MaterialCommunityIcons
-                  style={styles.icon}
-                  name={iconName}
-                  size={30}
-                  color={color}
-                />
-              );
-            },
-          })}
-          tabBarOptions={{
-            activeTintColor: colors.primary,
-            inactiveTintColor: "gray",
-            style: [styles.nav, showKeyboard],
-          }}
-        >
-          <Tab.Screen
-            name="ListOfExpenses"
-            component={ListOfExpenses}
-            options={{
-              tabBarLabel: "",
+                return (
+                  <MaterialCommunityIcons
+                    style={styles.icon}
+                    name={iconName}
+                    size={30}
+                    color={color}
+                  />
+                );
+              },
+            })}
+            tabBarOptions={{
+              activeTintColor: colors.primary,
+              inactiveTintColor: "gray",
+              style: [styles.nav, showKeyboard],
             }}
-          />
-          <Tab.Screen
-            name="NewUser"
-            component={NewUser}
-            options={{
-              tabBarLabel: "",
-            }}
-          />
-          <Tab.Screen
-            name="Settings"
-            component={Settings}
-            options={{
-              tabBarLabel: "",
-            }}
-          />
-          <Tab.Screen
-            name="Search"
-            component={Search}
-            options={{
-              tabBarLabel: "",
-            }}
-          />
-          <Tab.Screen
-            name="NewExpense"
-            component={NewExpense}
-            options={{
-              tabBarLabel: "",
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </Screen>
+          >
+            <Tab.Screen
+              name="ListOfExpenses"
+              component={ListOfExpenses}
+              options={{
+                tabBarLabel: "",
+              }}
+            />
+            <Tab.Screen
+              name="NewUser"
+              component={NewUser}
+              options={{
+                tabBarLabel: "",
+              }}
+            />
+            <Tab.Screen
+              name="Settings"
+              component={Settings}
+              options={{
+                tabBarLabel: "",
+              }}
+            />
+            <Tab.Screen
+              name="Search"
+              component={Search}
+              options={{
+                tabBarLabel: "",
+              }}
+            />
+            <Tab.Screen
+              name="NewExpense"
+              component={NewExpense}
+              options={{
+                tabBarLabel: "",
+              }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </Screen>
+    </>
   );
 };
 
