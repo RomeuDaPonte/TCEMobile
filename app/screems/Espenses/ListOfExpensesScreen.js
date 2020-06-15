@@ -1,24 +1,26 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 
-import AppText from "../../components/appText";
 import { UseListOfExpenses } from "../../customHooks/useListOfExpenses";
+import ListItem from "../../components/ListItem";
+import ListItemSeparator from "../../components/ListItemSeparator";
 
-const ListOfExpenses = ({ user }) => {
+const ListOfExpenses = () => {
   const { listOfExpenses } = UseListOfExpenses();
-  console.log(listOfExpenses);
 
   return (
-    <View style={styles.list}>
-      <AppText>Ola lista de despezas</AppText>
-    </View>
+    <>
+      {listOfExpenses && (
+        <FlatList
+          data={listOfExpenses}
+          keyExtractor={(expense) => expense._id}
+          renderItem={({ item }) => <ListItem item={item} />}
+          ItemSeparatorComponent={() => <ListItemSeparator />}
+          refreshing={true}
+        />
+      )}
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  list: {
-    flex: 1,
-  },
-});
 
 export default ListOfExpenses;

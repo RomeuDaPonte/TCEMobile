@@ -1,34 +1,33 @@
 import React from "react";
-import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
+import { View, StyleSheet, TouchableHighlight } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../LayoutHelpers/colors";
 import AppText from "./appText";
+import helperExpenses from "../Constants/sourcesOfExpenses";
 
-const ListItem = ({
-  title,
-  subTitle,
-  image,
-  IconComponent,
-  onPress,
-  renderRightActions,
-}) => {
+const ListItem = ({ item, onPress, renderRightActions }) => {
+  const icon = helperExpenses.mappingItemToIcon(item);
+
   return (
     <Swipeable renderRightActions={renderRightActions}>
       <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
         <View style={styles.container}>
-          {IconComponent}
-          {image && <Image style={styles.image} source={image} />}
+          {icon && (
+            <MaterialCommunityIcons
+              color={icon.backgroundColor}
+              name={icon.icon}
+              size={25}
+            />
+          )}
           <View style={styles.detailsContainer}>
             <AppText style={styles.title} numberOfLines={1}>
-              {title}
+              {item.source}
             </AppText>
-            {subTitle && (
-              <AppText style={styles.subTitle} numberOfLines={2}>
-                {subTitle}
-              </AppText>
-            )}
+            <AppText style={styles.subTitle} numberOfLines={2}>
+              {item.amount} €
+            </AppText>
           </View>
           <MaterialCommunityIcons
             color={colors.medium}

@@ -85,6 +85,13 @@ const sourcesOfExpenses = [
   },
 ];
 
+function mappingItemToIcon(item) {
+  return sourcesOfExpenses.find(function (source) {
+    return source.label === item.source;
+  });
+}
+
 export default {
   sourcesOfExpenses,
+  mappingItemToIcon,
 };
