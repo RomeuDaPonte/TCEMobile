@@ -26,7 +26,6 @@ const NewExpense = ({ navigation }) => {
   const [err, setErr] = useState();
 
   function addExpense(newExpense) {
-    console.log(newExpense);
     const newListOfExpenses = [newExpense, ...listOfExpenses];
     setListOfExpenses(newListOfExpenses);
     navigation.navigate("ListOfExpenses");

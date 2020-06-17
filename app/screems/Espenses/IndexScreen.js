@@ -12,7 +12,7 @@ import Search from "../Espenses/SearchScreen";
 import Settings from "../Account/SettingsScreen";
 import colors from "../../LayoutHelpers/colors";
 import useToggleKeyboard from "../../customHooks/useToggleKeyboard";
-import AppHeader from "../../components/AppHeader";
+import Header from "./Header";
 import { ListOfExpensesProvider } from "../../contexts/listOfExpensesContext";
 
 const Tab = createBottomTabNavigator();
@@ -22,7 +22,7 @@ const IndexScreen = ({ route }) => {
 
   return (
     <ListOfExpensesProvider>
-      <AppHeader />
+      <Header />
       <Screen>
         <NavigationContainer independent={true}>
           <Tab.Navigator
