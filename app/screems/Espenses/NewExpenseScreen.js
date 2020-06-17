@@ -18,16 +18,25 @@ import AppFormDatePicker from "../../components/forms/AppFormDatePicker";
 import AppFormCheckbox from "../../components/forms/AppFormCheckbox";
 import { UseCurrentUser } from "../../customHooks/useCurrentUser";
 import expenseService from "../../services/expenseService";
+import { useListOfExpensesValue } from "../../contexts/listOfExpensesContext";
 
 const NewExpense = ({ navigation }) => {
+  const { listOfExpenses, setListOfExpenses } = useListOfExpensesValue();
   const { currentUser } = UseCurrentUser();
   const [err, setErr] = useState();
+
+  function addExpense(newExpense) {
+    console.log(newExpense);
+    const newListOfExpenses = [newExpense, ...listOfExpenses];
+    setListOfExpenses(newListOfExpenses);
+    navigation.navigate("ListOfExpenses");
+  }
 
   function handleSubmit(values) {
     values.userId = currentUser._id;
     expenseService
       .newExpense(values)
-      .then((res) => navigation.navigate("ListOfExpenses"))
+      .then((res) => addExpense(res.data))
       .catch((err) => setErr(err.response.data));
   }
 

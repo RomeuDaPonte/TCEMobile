@@ -13,6 +13,7 @@ import Settings from "../Account/SettingsScreen";
 import colors from "../../LayoutHelpers/colors";
 import useToggleKeyboard from "../../customHooks/useToggleKeyboard";
 import AppHeader from "../../components/AppHeader";
+import { ListOfExpensesProvider } from "../../contexts/listOfExpensesContext";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +21,7 @@ const IndexScreen = ({ route }) => {
   const { showKeyboard } = useToggleKeyboard();
 
   return (
-    <>
+    <ListOfExpensesProvider>
       <AppHeader />
       <Screen>
         <NavigationContainer independent={true}>
@@ -89,7 +90,7 @@ const IndexScreen = ({ route }) => {
           </Tab.Navigator>
         </NavigationContainer>
       </Screen>
-    </>
+    </ListOfExpensesProvider>
   );
 };
 

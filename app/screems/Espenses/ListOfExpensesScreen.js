@@ -1,12 +1,12 @@
 import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { FlatList } from "react-native";
 
-import { UseListOfExpenses } from "../../customHooks/useListOfExpenses";
 import ListItem from "../../components/ListItem";
 import ListItemSeparator from "../../components/ListItemSeparator";
+import { useListOfExpensesValue } from "../../contexts/listOfExpensesContext";
 
 const ListOfExpenses = () => {
-  const { listOfExpenses } = UseListOfExpenses();
+  const { listOfExpenses } = useListOfExpensesValue();
 
   return (
     <>

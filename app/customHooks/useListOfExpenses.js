@@ -19,5 +19,5 @@ export const UseListOfExpenses = () => {
     })();
   }, []);
 
-  return { listOfExpenses };
+  return { listOfExpenses, setListOfExpenses };
 };
