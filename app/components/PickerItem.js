@@ -12,7 +12,7 @@ const PickerItem = ({ item, onPress }) => {
           size={40}
           backgroundColor={item.backgroundColor}
         />
-        <AppText style={styles.appText}>{item.label}</AppText>
+        <AppText style={styles.appText}>{item.value}</AppText>
       </View>
     </TouchableOpacity>
   );

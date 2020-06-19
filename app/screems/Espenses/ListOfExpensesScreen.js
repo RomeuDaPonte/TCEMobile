@@ -4,7 +4,6 @@ import { FlatList } from "react-native";
 import ListItem from "../../components/ListItem";
 import ListItemSeparator from "../../components/ListItemSeparator";
 import { useListOfExpensesValue } from "../../contexts/listOfExpensesContext";
-import LIstItemDateSeparator from "../../components/ListItemDateSeparator";
 import ListItemDateSeparator from "../../components/ListItemDateSeparator";
 
 const ListOfExpenses = () => {
