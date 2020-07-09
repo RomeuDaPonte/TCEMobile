@@ -21,7 +21,17 @@ function getListOfExpenses(userId) {
   });
 }
 
+function deleteExpense(expenseId) {
+  return new Promise((resolve, reject) => {
+    http
+      .delete(apiEndPont + "/delete/" + expenseId)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err))
+  })
+}
+
 export default {
   newExpense,
   getListOfExpenses,
+  deleteExpense
 };
